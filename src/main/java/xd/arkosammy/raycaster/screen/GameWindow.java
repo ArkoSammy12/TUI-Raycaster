@@ -78,7 +78,7 @@ public class GameWindow {
         lastTime = now;
         double fps = frames / elapsedSeconds;
 
-        stats.putString(0, 0, String.format("x=%f, y=%f, angle=%f, FOV=%d, viewDistance=%d, FPS=%.2f", game.getPlayer().getMapCoordinate().getXPos(), game.getPlayer().getMapCoordinate().getYPos(),game.getPlayer().getPlayerAngle() % 360, game.getPlayer().getFov(), this.viewDistance, fps));
+        stats.putString(0, 0, String.format("x=%.2f, y=%.2f, angle=%.2f, FOV=%d, viewDistance=%d, FPS=%.2f", game.getPlayer().getMapCoordinate().getXPos(), game.getPlayer().getMapCoordinate().getYPos(),game.getPlayer().getPlayerAngle() % 360, game.getPlayer().getFov(), this.viewDistance, fps));
 
         for (ScreenElement e : this.worldElements) {
             this.terminalScreen.setCharacter(e.screenCoordinate().getXPos(), e.screenCoordinate().getYPos() + 1, e.graphic());
