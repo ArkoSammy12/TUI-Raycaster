@@ -9,14 +9,13 @@ public class Player {
 
     private static final double distanceMultiplier = 1.1;
     private MapCoordinate mapCoordinate;
-    private double angle;
+    private double angle = 0;
     private int fov = 100;
 
     private final PlayerHUD playerHUD;
 
     public Player(){
         this.mapCoordinate = new MapCoordinate(5, 5);
-        this.angle = 0;
         this.playerHUD = new PlayerHUD();
     }
 

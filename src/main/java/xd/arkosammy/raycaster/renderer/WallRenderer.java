@@ -15,7 +15,7 @@ public class WallRenderer implements Drawable {
 
     private final List<ScreenColumn> screenColumns = new ArrayList<>();
 
-    public void clearWallElements(){
+    public void clearScreenColumns(){
         this.screenColumns.clear();
     }
 

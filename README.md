@@ -13,3 +13,4 @@ A raycaster for the terminal, made using the [Lanterna](https://github.com/mabe0
 - '-' Decrease FOV.
 - 't' Increase view distance.
 - 'g' Decrease view distance.
+- 'p' Close the game.

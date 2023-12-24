@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class GameWindow {
+public class GameWindow implements AutoCloseable {
 
     private final Screen terminalScreen;
     private final Set<ScreenElement> worldElements = new LinkedHashSet<>();
@@ -58,7 +58,7 @@ public class GameWindow {
         return this.terminalScreen.getTerminalSize().getRows();
     }
 
-    public void clearAll() {
+    private void clearAll() {
         this.hudElements.clear();
         this.worldElements.clear();
     }
@@ -93,4 +93,11 @@ public class GameWindow {
         this.clearAll();
         frames++;
     }
+
+    public void close() throws IOException {
+        this.terminalScreen.stopScreen();
+        this.terminalScreen.close();
+        this.clearAll();
+    }
+
 }

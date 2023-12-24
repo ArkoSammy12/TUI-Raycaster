@@ -59,14 +59,15 @@ public class RayCasterGame {
             this.wallRenderer.createScreenColumns(this);
             this.gameWindow.submitWorldElement(this.wallRenderer);
             this.gameWindow.refreshWindow(this);
-            this.wallRenderer.clearWallElements();
+            this.wallRenderer.clearScreenColumns();
 
         }
 
     }
 
-    private void terminate(){
+    private void terminate() throws IOException {
         this.running = false;
+        this.gameWindow.close();
     }
 
     public static void checkInput(Screen screen) throws IOException {
