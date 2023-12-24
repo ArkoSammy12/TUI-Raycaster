@@ -27,9 +27,9 @@ public class WallRenderer implements Drawable {
         double fov = player.getFov();
         double playerAngle = player.getPlayerAngle();
 
-        for(int x = 0; x < game.getGameWindow().getWidth(); x++){
+        for(int xScreenCoordinate = 0; xScreenCoordinate < game.getGameWindow().getWidth(); xScreenCoordinate++){
 
-             double rayAngle = (playerAngle - fov / 2) + ((double) x / game.getGameWindow().getWidth()) * fov;
+             double rayAngle = (playerAngle - fov / 2) + ((double) xScreenCoordinate / game.getGameWindow().getWidth()) * fov;
              double distanceToWall = 0;
              boolean hitWill = false;
              double vecX = Math.sin(Math.toRadians(rayAngle));
@@ -62,7 +62,7 @@ public class WallRenderer implements Drawable {
             distanceToWall *= Math.cos(Math.toRadians(playerAngle - rayAngle));
             int ceiling = (int) ((game.getGameWindow().getHeight() / 2) - game.getGameWindow().getHeight() / distanceToWall);
             int floor = game.getGameWindow().getHeight() - ceiling;
-            this.screenColumns.add(new ScreenColumn(x, ceiling, floor, distanceToWall));
+            this.screenColumns.add(new ScreenColumn(xScreenCoordinate, ceiling, floor, distanceToWall));
 
         }
 

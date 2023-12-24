@@ -13,8 +13,6 @@ public record ScreenColumn(int xScreenCoordinate, int ceiling, int floor, double
     @Override
     public List<ScreenElement> getScreenElements(GameWindow gameWindow) {
         List<ScreenElement> elements = new ArrayList<>();
-
-
         for (int yScreenCoordinate = 0; yScreenCoordinate < gameWindow.getHeight(); yScreenCoordinate++) {
             ScreenCoordinate screenCoordinate = new ScreenCoordinate(this.xScreenCoordinate, yScreenCoordinate);
             if (yScreenCoordinate > ceiling && yScreenCoordinate < floor) {
