@@ -7,7 +7,7 @@ import xd.arkosammy.raycaster.map.MapCoordinate;
 
 public class Player {
 
-    private static final double distanceMultiplier = 1.5;
+    private static final double distanceMultiplier = 1.1;
     private MapCoordinate mapCoordinate;
     private double angle;
     private int fov = 100;
@@ -56,8 +56,8 @@ public class Player {
         double vecX = Math.sin(Math.toRadians(moveDirection)) * distanceMultiplier;
         double vecY = Math.cos(Math.toRadians(moveDirection)) * distanceMultiplier;
 
-        int newX = (int) Math.floor(this.mapCoordinate.getXPos() + vecX);
-        int newY = (int) Math.floor(this.mapCoordinate.getYPos() + vecY);
+        int newX = (int) Math.round(this.mapCoordinate.getXPos() + vecX);
+        int newY = (int) Math.round(this.mapCoordinate.getYPos() + vecY);
 
         MapCoordinate newMapCoordinate = new MapCoordinate(newX, newY);
         char element = gameMap.getMapElementAt(newMapCoordinate);
