@@ -13,15 +13,13 @@ import java.util.List;
 
 public class WallRenderer implements Drawable {
 
-    private static final int MAX_DEPTH = 30;
-
     private final List<ScreenColumn> screenColumns = new ArrayList<>();
 
     public void clearWallElements(){
         this.screenColumns.clear();
     }
 
-    public void createWallElements(RayCasterGame game){
+    public void createScreenColumns(RayCasterGame game){
 
         Player player = game.getPlayer();
         GameMap map = game.getGameMap();
@@ -37,7 +35,7 @@ public class WallRenderer implements Drawable {
              double vecX = Math.sin(Math.toRadians(rayAngle));
              double vecY = Math.cos(Math.toRadians(rayAngle));
 
-             while(!hitWill && distanceToWall < MAX_DEPTH){
+             while(!hitWill && distanceToWall < game.getGameWindow().getViewDistance()){
 
                  distanceToWall += 0.01;
 
@@ -47,13 +45,12 @@ public class WallRenderer implements Drawable {
                  if(testX < 0 || testX >= GameMap.MAP_WIDTH || testY < 0 || testY >= GameMap.MAP_LENGTH){
 
                      hitWill = true;
-                     distanceToWall = MAX_DEPTH;
+                     distanceToWall = game.getGameWindow().getViewDistance();
 
                  } else {
 
                      char element = map.getMapElementAt(new MapCoordinate(testX, testY));
                      if(element == '#'){
-
                          hitWill = true;
                      }
 
@@ -65,7 +62,7 @@ public class WallRenderer implements Drawable {
             distanceToWall *= Math.cos(Math.toRadians(playerAngle - rayAngle));
             int ceiling = (int) ((game.getGameWindow().getHeight() / 2) - game.getGameWindow().getHeight() / distanceToWall);
             int floor = game.getGameWindow().getHeight() - ceiling;
-            this.screenColumns.add(new ScreenColumn(x, ceiling, floor));
+            this.screenColumns.add(new ScreenColumn(x, ceiling, floor, distanceToWall));
 
         }
 

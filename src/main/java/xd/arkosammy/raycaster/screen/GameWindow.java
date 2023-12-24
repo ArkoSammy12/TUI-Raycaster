@@ -10,9 +10,7 @@ import xd.arkosammy.raycaster.RayCasterGame;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 public class GameWindow {
@@ -20,8 +18,10 @@ public class GameWindow {
     private final Screen terminalScreen;
     private final Set<ScreenElement> worldElements = new LinkedHashSet<>();
     private final Set<ScreenElement> hudElements = new LinkedHashSet<>();
+    private int viewDistance = 20;
     private int frames;
     private long lastTime;
+
 
     public GameWindow() throws IOException {
         Terminal terminal = new DefaultTerminalFactory(System.out, System.in, StandardCharsets.UTF_8).createTerminal();
@@ -32,6 +32,14 @@ public class GameWindow {
         this.terminalScreen.startScreen();
         this.frames = 0;
         this.lastTime = System.nanoTime();
+    }
+
+    public void changeViewDistance(int delta){
+        this.viewDistance = Math.clamp(this.viewDistance + delta, 5, 40);
+    }
+
+    public int getViewDistance(){
+        return this.viewDistance;
     }
 
     public void updateSize() {
@@ -70,12 +78,13 @@ public class GameWindow {
         lastTime = now;
         double fps = frames / elapsedSeconds;
 
-        stats.putString(0, 0, String.format("x=%f, y=%f, angle=%f, FOV=%d, FPS=%.2f", game.getPlayer().getMapCoordinate().getXPos(), game.getPlayer().getMapCoordinate().getYPos(),game.getPlayer().getPlayerAngle() % 360, game.getPlayer().getFov(), fps));
+        stats.putString(0, 0, String.format("x=%f, y=%f, angle=%f, FOV=%d, viewDistance=%d, FPS=%.2f", game.getPlayer().getMapCoordinate().getXPos(), game.getPlayer().getMapCoordinate().getYPos(),game.getPlayer().getPlayerAngle() % 360, game.getPlayer().getFov(), this.viewDistance, fps));
 
         for (ScreenElement e : this.worldElements) {
             this.terminalScreen.setCharacter(e.screenCoordinate().getXPos(), e.screenCoordinate().getYPos() + 1, e.graphic());
         }
 
+        //Overlay HUD on top world screen elements
         for (ScreenElement e : this.hudElements) {
             this.terminalScreen.setCharacter(e.screenCoordinate().getXPos(), e.screenCoordinate().getYPos() + 1, e.graphic());
         }

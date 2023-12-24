@@ -53,11 +53,11 @@ public class Player {
             case LEFT -> this.angle + 90;
         };
 
-        double vecX = Math.sin(Math.toRadians(moveDirection));
-        double vecY = Math.cos(Math.toRadians(moveDirection));
+        double vecX = Math.sin(Math.toRadians(moveDirection)) * distanceMultiplier;
+        double vecY = Math.cos(Math.toRadians(moveDirection)) * distanceMultiplier;
 
-        int newX = (int) Math.floor(this.mapCoordinate.getXPos() + vecX * distanceMultiplier);
-        int newY = (int) Math.floor(this.mapCoordinate.getYPos() + vecY * distanceMultiplier);
+        int newX = (int) Math.floor(this.mapCoordinate.getXPos() + vecX);
+        int newY = (int) Math.floor(this.mapCoordinate.getYPos() + vecY);
 
         MapCoordinate newMapCoordinate = new MapCoordinate(newX, newY);
         char element = gameMap.getMapElementAt(newMapCoordinate);
@@ -66,6 +66,7 @@ public class Player {
             this.mapCoordinate = newMapCoordinate;
         }
     }
+
 
     public MapCoordinate getMapCoordinate(){
         return this.mapCoordinate;

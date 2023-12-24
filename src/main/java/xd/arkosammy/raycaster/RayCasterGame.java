@@ -1,7 +1,6 @@
 package xd.arkosammy.raycaster;
 
 import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import xd.arkosammy.raycaster.map.GameMap;
 import xd.arkosammy.raycaster.player.Player;
@@ -57,7 +56,7 @@ public class RayCasterGame {
             this.gameWindow.updateSize();
             this.player.tick(this);
             this.gameWindow.submitHudElement(this.player.getPlayerHUD());
-            this.wallRenderer.createWallElements(this);
+            this.wallRenderer.createScreenColumns(this);
             this.gameWindow.submitWorldElement(this.wallRenderer);
             this.gameWindow.refreshWindow(this);
             this.wallRenderer.clearWallElements();
@@ -98,11 +97,10 @@ public class RayCasterGame {
                 case 'q' -> RayCasterGame.getInstance().player.rotate(-3);
                 case '+' -> RayCasterGame.getInstance().player.changeFov(1);
                 case '-' -> RayCasterGame.getInstance().player.changeFov(-1);
+                case 'p' -> RayCasterGame.getInstance().terminate();
+                case 't' -> RayCasterGame.getInstance().getGameWindow().changeViewDistance(1);
+                case 'g' -> RayCasterGame.getInstance().getGameWindow().changeViewDistance(-1);
 
-            }
-
-            if(keyStroke.getKeyType() == KeyType.Enter){
-                RayCasterGame.getInstance().terminate();
             }
 
         }
