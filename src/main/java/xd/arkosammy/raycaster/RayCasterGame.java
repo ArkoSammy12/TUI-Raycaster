@@ -96,7 +96,7 @@ public class RayCasterGame {
 
                 case 'e' -> RayCasterGame.getInstance().player.rotate(3);
                 case 'q' -> RayCasterGame.getInstance().player.rotate(-3);
-                case '+' -> RayCasterGame.getInstance().player.changeFov(1);
+                case '=' -> RayCasterGame.getInstance().player.changeFov(1);
                 case '-' -> RayCasterGame.getInstance().player.changeFov(-1);
                 case 'p' -> RayCasterGame.getInstance().terminate();
                 case 't' -> RayCasterGame.getInstance().getGameWindow().changeViewDistance(1);
