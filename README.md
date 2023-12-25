@@ -9,7 +9,7 @@ A raycaster for the terminal, made using the [Lanterna](https://github.com/mabe0
 - 'a': Move left.
 - 'q' Rotate left.
 - 'e' Rotate right.
-- '+' Increase FOV.
+- '=' Increase FOV.
 - '-' Decrease FOV.
 - 't' Increase view distance.
 - 'g' Decrease view distance.
