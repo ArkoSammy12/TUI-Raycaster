@@ -37,7 +37,7 @@ public class WallRenderer implements Drawable {
 
              while(!hitWill && distanceToWall < game.getGameWindow().getViewDistance()){
 
-                 distanceToWall += 0.01;
+                 distanceToWall += 0.001;
 
                  int testX = (int)(player.getMapCoordinate().getXPos() + vecX * distanceToWall);
                  int testY = (int)(player.getMapCoordinate().getYPos() + vecY * distanceToWall);
