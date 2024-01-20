@@ -1,15 +1,19 @@
 package xd.arkosammy.raycaster.screen;
 
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
+import com.googlecode.lanterna.terminal.swing.TerminalEmulatorAutoCloseTrigger;
 import xd.arkosammy.raycaster.RayCasterGame;
 
+import java.awt.*;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -24,11 +28,18 @@ public class GameWindow implements AutoCloseable {
 
 
     public GameWindow() throws IOException {
-        Terminal terminal = new DefaultTerminalFactory(System.out, System.in, StandardCharsets.UTF_8).createTerminal();
-        terminal.setCursorVisible(false);
-        terminal.setBackgroundColor(TextColor.ANSI.BLACK);
+        Terminal terminal = new DefaultTerminalFactory(System.out, System.in, Charset.defaultCharset())
+                .setInitialTerminalSize(new TerminalSize(104, 100))
+                .setTerminalEmulatorFrameAutoCloseTrigger(TerminalEmulatorAutoCloseTrigger.CloseOnEscape)
+                .setTerminalEmulatorTitle("Raycaster")
+                .setTerminalEmulatorFontConfiguration(AWTTerminalFontConfiguration.newInstance(new Font("Monospaced", Font.BOLD, 1)))
+                .setPreferTerminalEmulator(true)
+                .createTerminal();
+
         terminal.setForegroundColor(TextColor.ANSI.WHITE);
-        this.terminalScreen = new TerminalScreen(terminal);
+        terminal.setBackgroundColor(TextColor.ANSI.BLACK);
+        terminal.setCursorVisible(false);
+        terminalScreen = new TerminalScreen(terminal);
         this.terminalScreen.startScreen();
         this.frames = 0;
         this.lastTime = System.nanoTime();
